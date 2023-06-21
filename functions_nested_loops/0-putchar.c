@@ -1,14 +1,13 @@
-#include <stdio.h>
+#include <unistd.h>
 
 /**
  * main - Entry point of the program
  *
- * Description: Write a program that prints _putchar, followed by a new line.
- *
- * Return: 0 (success)
+ * Return: Always 0
  */
-
-int main() {
-    printf("_putchar\n");
+int main(void)
+{
+    char c[] = "_putchar\n";
+    write(1, c, sizeof(c) - 1);
     return 0;
 }
