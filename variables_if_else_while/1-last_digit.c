@@ -1,6 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+/**
+ * main - Entry point
+ *
+ * Description: Prints the last digit of a random number
+ * stored in the variable n.
+ *
+ * Return: 0 (Success)
+ */
 int main(void)
 {
 int n;
