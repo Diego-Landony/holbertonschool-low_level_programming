@@ -13,7 +13,7 @@ for (j = i + 1; j < 10; j++)
 {
 putchar(i + '0'); /* Print first digit */
 putchar(j + '0'); /* Print second digit */
-if (i != 8 || j != 9) /* Add comma and space unless it's the last combination */
+if (i != 8 || j != 9) /*Add comma and space unless it's the last combination*/
 {
 putchar(','); /* Print comma */
 putchar(' '); /* Print space */
