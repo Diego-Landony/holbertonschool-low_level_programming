@@ -7,14 +7,11 @@
  */
 int main(void)
 {
-int i;
-for (i = 15; i >= 0; i--)
+int i;   
+for (i = 'z'; i >= 'a'; i--)
 {
-if (i < 10)
-putchar(i + '0'); /* Print digits 0-9 */
-else
-putchar(i + 'a' - 10); /* Print lowercase letters a-f */
+putchar(i); /* Print lowercase letters in reverse */
 }
-printf('\n');
+putchar('\n'); /* Print newline character */  
 return (0);
 }
