@@ -14,10 +14,7 @@ int main(void)
 		if (i < 10)
 			putchar(i + '0'); /* Print digits 0-9 */
 		else
-			putchar(i + 'a' - 10); /* Print lowercase letters a-f */
+			putchar(i + 'a' - 10'\n'); /* Print lowercase letters a-f */
 	}
-
-	putchar('\n');
-
 	return (0);
 }
