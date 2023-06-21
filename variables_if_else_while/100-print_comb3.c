@@ -1,5 +1,4 @@
 #include <stdio.h>
-
 /**
  * main - Entry point of the program
  *
@@ -22,5 +21,5 @@ putchar(' '); /* Print space */
 }
 }
 putchar('\n'); /* Print newline character */
-return 0;
+return (0);
 }
