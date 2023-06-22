@@ -20,10 +20,17 @@ fclean: clean oclean
 
 re: oclean all
 
-.PHONY: school
-school:
+ifeq ($(origin RM), undefined)
+	RM_CHECK = 1
+endif
 
-ifneq (,$(filter $(RM),$(shell grep -o $(RM) $(MAKEFILE_LIST) | uniq -d)))
-$(error Variable RM is not defined but used (maximum 2 times). Also checks that $(RM) is only used one time in the Makefile)
+ifeq ($(words $(filter $(RM), $(shell grep -o $(RM) $(MAKEFILE_LIST)))), 1)
+	ifndef RM_CHECK
+		RM_CHECK = 2
+	else
+		$(error Variable RM is not defined but used (maximum 2 times). Also checks that $(RM) is only used one time in the Makefile)
+	endif
+else ifneq ($(words $(filter $(RM), $(shell grep -o $(RM) $(MAKEFILE_LIST)))), 0)
+	$(error Variable RM is not defined but used (maximum 2 times). Also checks that $(RM) is only used one time in the Makefile)
 endif
 
