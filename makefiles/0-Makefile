@@ -1,0 +1,6 @@
+all:
+    # Comando para compilar y enlazar mi programa
+    # usar el compilador preferido (por ejemplo, gcc) y los archivos fuente necesarios
+
+school: all
+
