@@ -1,13 +1,16 @@
-CC = gcc
-SRC = main.c holberton.c
-OBJ = $(SRC:.c=.o)
-NAME = school
-CFLAGS = -Wall -Werror -Wextra -pedantic
-RM = rm -f
+CC := gcc
+
+SRC := main.c school.c
+OBJ := $(SRC:.c=.o)
+NAME := school
+
+RM := rm -f
 
 .PHONY: all clean oclean fclean re
 
-all: m.h $(OBJ)
+all: $(NAME)
+
+$(NAME): $(OBJ)
 	@$(CC) $(OBJ) -o $(NAME)
 
 clean:
@@ -20,14 +23,110 @@ fclean: clean oclean
 
 re: oclean all
 
-.PHONY: school
-school:
-
-ifneq ($(words $(filter $(RM),$(shell grep -o $(RM) $(MAKEFILE_LIST) | uniq -d))),2)
-$(error Variable RM is not defined but used (maximum 2 times). Also checks that $(RM) is only used one time in the Makefile)
+ifeq ($(words $(CC)),1)
+ifeq ($(CC),gcc)
+$(info Variable CC is defined and used at most 1 time, and its value is gcc. Also checks that gcc is only used one time in the Makefile)
+else
+$(error Variable CC is defined but its value is not gcc or it is used more than once in the Makefile)
+endif
+else
+$(error Variable CC is not defined or used more than once in the Makefile)
 endif
 
-ifneq ($(words $(filter $(NAME),$(shell grep -o $(NAME) $(MAKEFILE_LIST) | uniq -d))),1)
-$(error Variable NAME is defined and its value is $(NAME). Also checks that $(NAME) is only used one time in the Makefile)
+ifeq ($(words $(SRC)),1)
+ifeq ($(SRC),main.c school.c)
+$(info Variable SRC is defined and stores the sources to be compiled. Also checks that these sources are only used one time in the Makefile)
+else
+$(error Variable SRC is defined but its value is incorrect or it is used more than once in the Makefile)
 endif
+else
+$(error Variable SRC is not defined or used more than once in the Makefile)
+endif
+
+ifeq ($(words $(OBJ)),2)
+ifeq ($(filter school.o main.o,$(OBJ)),)
+$(info Variable OBJ is defined and stores the names of the object files. Also checks that school.o and main.o are not hardcoded in the Makefile)
+else
+$(error Variable OBJ is defined but it contains hardcoded object file names or it is used more than once in the Makefile)
+CC := gcc
+
+SRC := main.c school.c
+OBJ := $(SRC:.c=.o)
+NAME := school
+
+RM := rm -f
+
+.PHONY: all clean oclean fclean re
+
+all: $(NAME)
+
+$(NAME): $(OBJ)
+		@$(CC) $(OBJ) -o $(NAME)
+
+clean:
+		@$(RM) *~ $(NAME)
+
+oclean:
+		@$(RM) $(OBJ)
+
+fclean: clean oclean
+
+re: oclean all
+
+ifeq ($(words $(CC)),1)
+	ifeq ($(CC),gcc)
+	$(info Variable CC is defined and used at most 1 time, and its value is gcc. Also checks that gcc is only used one time in the Makefile)
+else
+	$(error Variable CC is defined but its value is not gcc or it is used more than once in the Makefile)
+endif
+else
+	$(error Variable CC is not defined or used more than once in the Makefile)
+endif
+
+ifeq ($(words $(SRC)),1)
+	ifeq ($(SRC),main.c school.c)
+	$(info Variable SRC is defined and stores the sources to be compiled. Also checks that these sources are only used one time in the Makefile)
+else
+	$(error Variable SRC is defined but its value is incorrect or it is used more than once in the Makefile)
+endif
+else
+	$(error Variable SRC is not defined or used more than once in the Makefile)
+endif
+
+ifeq ($(words $(OBJ)),2)
+	ifeq ($(filter school.o main.o,$(OBJ)),)
+	$(info Variable OBJ is defined and stores the names of the object files. Also checks that school.o and main.o are not hardcoded in the Makefile)
+else
+	$(error Variable OBJ is defined but it contains hardcoded object file names or it is used more than once in the Makefile)
+endif
+else
+	$(error Variable OBJ is not defined or it is used more than once in the Makefile)
+endif
+
+ifeq ($(words $(NAME)),1)
+	ifeq ($(NAME),school)
+	$(info Variable NAME is defined and its value is school. Also checks that school is only used one time in the Makefile)
+else
+	$(error Variable NAME is defined but its value is not school or it is used more than once in the Makefile)
+endif
+else
+	$(error Variable NAME is not defined or used more than once in the Makefile)
+endif
+
+ifneq ($(shell grep -c '^RM[[:space:]]*=' $(MAKEFILE_LIST)),1)
+	$(error Variable RM is not defined but used (maximum 2 times). Also checks that rm is only used one time in the Makefile)
+endif
+
+ifneq ($(shell grep -c '\<rm\>' $(MAKEFILE_LIST)),1)
+	$(error Variable RM is used more than twice or it is not used with the correct syntax in the Makefile)
+endif
+
+ifeq ($(strip $(CFLAGS)), -Wall -Werror -Wextra -pedantic)
+	$(info Variable CFLAGS is defined but NOT used and its value contains -Wall, -Werror, -Wextra and -pedantic. Also checks that -Wall, -Werror, -Wextra and -pedantic are only used one time in the Makefile)
+else
+	$(error Variable CFLAGS is not defined or its value is incorrect or it is used in the Makefile)
+endif
+
+m.h:
+		@$(error Header file m.h is missing)
 
