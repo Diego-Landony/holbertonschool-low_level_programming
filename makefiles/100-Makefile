@@ -1,4 +1,3 @@
-
 CC = gcc
 SRC = main.c school.c
 OBJ = $(SRC:.c=.o)
@@ -14,8 +13,8 @@ all: $(NAME)
 $(NAME): $(OBJ)
         $(CC) $(OBJ) -o $(NAME)
 
-$(OBJ): $(SRC) $(DEPS)
-        $(CC) $(CFLAGS) -c $(filter %.c,$^)
+%.o: %.c $(DEPS)
+        $(CC) $(CFLAGS) -c $< -o $@
 
 clean:
         $(RM) $(filter-out $(DEPS),$(wildcard *~ \#*\#)) $(NAME)
