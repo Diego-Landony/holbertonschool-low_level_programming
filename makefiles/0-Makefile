@@ -1,9 +1,5 @@
-all:
-# Comando para compilar y enlazar mi programa
+all: school
+
 school: main.c m.h school.c
-
-# usar el compilador preferido (por ejemplo, gcc) y los archivos fuente necesarios
-gcc -o school main.c m.h school.c
-
-school: all
+    gcc -o school main.c m.h school.c
 
