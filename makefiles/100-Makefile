@@ -1,40 +1,29 @@
 CC = gcc
-SRC = main.c school.c
-OBJ := $(patsubst %.c, %.o, $(SRC))
+SRC = main.c holberton.c
+OBJ = $(SRC:.c=.o)
 NAME = school
-RM = rm -f
 CFLAGS = -Wall -Werror -Wextra -pedantic
-DEPS = m.h
+RM = rm -f
 
 .PHONY: all clean oclean fclean re
 
-all: $(NAME)
-
-$(NAME): $(OBJ)
-        $(CC) $(OBJ) -o $(NAME)
-
-%.o: %.c $(DEPS)
-        $(CC) $(CFLAGS) -c $< -o $@
+all: m.h $(OBJ)
+	@$(CC) $(OBJ) -o $(NAME)
 
 clean:
-        $(RM) $(filter-out $(DEPS), $(wildcard *~ \#*\#)) $(NAME)
+	@$(RM) *~ $(NAME)
 
 oclean:
-        $(RM) $(OBJ)
+	@$(RM) $(OBJ)
 
 fclean: clean oclean
 
-re: fclean all
+re: oclean all
 
-ifeq ($(origin CC), undefined)
-    CC = gcc
-endif
+.PHONY: school
+school:
 
-ifeq ($(CC), gcc)
-    ifndef CC_CHECK
-        CC_CHECK = true
-    else
-        $(error "Error: gcc is used more than once in the Makefile.")
-    endif
+ifneq (,$(filter $(RM),$(shell grep -o $(RM) $(MAKEFILE_LIST) | uniq -d)))
+$(error Variable RM is not defined but used (maximum 2 times). Also checks that $(RM) is only used one time in the Makefile)
 endif
 
