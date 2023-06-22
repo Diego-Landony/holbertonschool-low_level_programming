@@ -23,11 +23,6 @@ fclean: clean oclean
 
 re: fclean all
 
-$(OBJ): %.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
-
-$(NAME): $(OBJ) m.h
-
 ifneq (,$(wildcard m.h))
 include m.h
 endif
