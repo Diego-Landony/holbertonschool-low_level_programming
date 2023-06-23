@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <math.h>
 /**
-* main - encuentra e imprime el factor primo más grande del número 612852475143,
+* main - encuentra e imprime el factor primo
+* más grande del número 612852475143,
 * seguido de una nueva línea.
 * Return: Siempre retorna 0 (éxito).
 */
