@@ -29,5 +29,5 @@ if (n == 0)
 *ptr = '\0';
 else
 ptr = '\0';
-return dest;
+return (dest);
 }
